@@ -1,11 +1,11 @@
 {
-  "name": "mlmachine_nodejs",
+  "name": "contest_ranker",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
-  "repository": "https://github.com/arushnagpal/mlmachine_nodejs",
+  "repository": "https://github.com/arushnagpal/contest_ranker.git",
   "dependencies": {
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
