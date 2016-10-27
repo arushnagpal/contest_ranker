@@ -1,5 +1,6 @@
 {
   "name": "contest_ranker",
+  "owner": "Arush Nagpal",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
