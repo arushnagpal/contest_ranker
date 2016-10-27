@@ -1,0 +1,20 @@
+extends header
+
+
+block content
+
+
+	section.content-block
+		.container
+			table.table
+				thead
+					tr
+						th Contest Name
+						th Participants
+				tbody
+					each item in data
+						tr
+							td #{item.name}
+								
+
+	include footer

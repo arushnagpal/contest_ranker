@@ -1,0 +1,32 @@
+extends header
+
+
+block content
+
+
+	// Start Content Block 3-8
+	section#content-3-8.content-block.content-3-8
+		.container
+			h3 My Submissions
+			p Most recent first
+			.col-sm-12
+				table.table.table-bordered
+					thead.thead-inverse
+						tr
+							th Problem Name
+							th Calculated Answer
+							th Time Submitted
+					tbody
+						each item in data
+							tr
+								td #{item.name}
+								td #{item.answer}
+								td #{item.time_submitted}
+
+
+			// /.row
+		// /.container
+	// // END Basic 1-5
+	// Start Footer 1-1
+	// // END Footer 1-1
+	include footer

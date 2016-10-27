@@ -1,0 +1,52 @@
+extends header
+
+
+block content
+
+
+	// Start Content Block 3-8
+	section#content-3-8.content-block.content-3-8
+		.container
+			.col-sm-12
+				.underlined-title.text-left
+					.editContent
+						h1 #{problemdata.name}
+					.editContent
+						h3
+							| Problem Statement: 
+					.editContent
+						h2
+							| #{problemdata.description}
+					if(problemdata.image)
+						.editContent
+							img(src='#{problemdata.image}.jpg', alt='Images')
+					- var path='images/problems/'+problemdata.uid+'.jpg'
+					if(problemdata.image)
+						.editContent
+							img(src=path)
+					
+			
+			.col-sm-6
+				.editContent
+					form.form(action='/submitans/'+problemdata.uid, method='POST', role='form',enctype='multipart/form-data')
+						input.form-control(name='answer', placeholder='Your Answer', type='answer')
+						button.btn.btn-sm.btn-primary.btn-block(type='submit')
+							| Submit
+			.col-sm-6
+				.editContent
+					h2 Statistics
+					p
+						| No.of Submissions:
+					p
+						| Currently Leading:
+					p
+						| Score: 
+
+
+
+			// /.row
+		// /.container
+	// // END Basic 1-5
+	// Start Footer 1-1
+	// // END Footer 1-1
+	include footer

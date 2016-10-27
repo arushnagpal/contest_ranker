@@ -1,0 +1,57 @@
+extends header
+
+
+block content
+
+	section.content-block
+		.container
+			if locals.message
+				.alert.alert-success
+					a.close(href='#', data-dismiss='alert', aria-label='close') ×
+					strong Success!
+					|  #{locals.message}.
+			if locals.error
+				.alert.alert-danger
+					a.close(href='#', data-dismiss='alert', aria-label='close') ×
+					strong Error!
+					|  #{locals.error}.
+					
+			.row
+				.col-xs-12.col-sm-12.col-md-4.well.well-sm
+					legend
+						a(href='http://www.jquery2dotnet.com')
+							i.glyphicon.glyphicon-globe
+						|  Sign up!
+					form.form(action='/signup', method='POST', role='form',enctype='multipart/form-data')
+						.row
+							.col-xs-6.col-md-6
+								input.form-control(name='firstname', placeholder='First Name', type='text', required='')
+							.col-xs-6.col-md-6
+								input.form-control(name='lastname', placeholder='Last Name', type='text', required='')
+						input.form-control(name='email', placeholder='Your Email', type='email')
+						input.form-control(name='password', placeholder='New Password', type='password')
+						//
+							label(for='')
+								| Birth Date
+							.row
+								.col-xs-4.col-md-4
+									select.form-control
+										option(value='Month') Month
+								.col-xs-4.col-md-4
+									select.form-control
+										option(value='Day') Day
+								.col-xs-4.col-md-4
+									select.form-control
+										option(value='Year') Year
+						label.radio-inline
+							input#inlineCheckbox1(type='radio', name='sex', value='male')
+							|                 Male
+						label.radio-inline
+							input#inlineCheckbox2(type='radio', name='sex', value='female')
+							|                 Female
+						br
+						br
+						button.btn.btn-lg.btn-primary.btn-block(type='submit')
+							| Sign up
+
+	include footer

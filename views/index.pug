@@ -1,0 +1,107 @@
+extends header
+
+
+block content
+
+		// Start Promo 2
+		section#promo-2.content-block.promo-2.min-height-600px.bg-deepocean
+			.container
+				.coming-soon.text-center
+					.editContent
+						h1 What are you waiting for?
+					.editContent
+						h2 Sorry our new website is launching very soon.
+					.row.countDown
+						.countDown-wrap
+							span.digits -543
+							input.countDown-input.day(data-max='79')
+							.digits-label days
+						.countDown-wrap
+							span.digits -23
+							input.countDown-input.hour
+							.digits-label hours
+						.countDown-wrap
+							span.digits -2
+							input.countDown-input.minute
+							.digits-label minutes
+						.countDown-wrap
+							span.digits -51
+							input.countDown-input.second
+							.digits-label seconds
+					// /.row / counter
+				// /.coming-soon
+			// /.container
+		// // END Promo 2
+		// Start Content Block 1-3
+		section#content-1-3.content-block.content-1-3
+			.container
+				.row
+					.col-md-12
+						.underlined-title
+							.editContent
+								h1 Every service under one roof
+							hr
+						.services-wrapper
+							.col-md-4
+								.icon.bg-crete
+									span.fa.fa-laptop
+								.editContent
+									h4 Digital Design
+								.editContent
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem.
+							.col-md-4
+								.icon.bg-finn
+									span.fa.fa-code
+								.editContent
+									h4 Web Development
+								.editContent
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem.
+							.col-md-4
+								.icon.bg-sunflower
+									span.fa.fa-rocket
+								.editContent
+									h4 Creative Direction
+								.editContent
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem.
+				// /.row
+			// /.container
+		// // END Content Block 1-3
+		// Start Footer 1-4
+		section.content-block-nopad.bg-deepocean
+			.container.footer-1-4
+				.editContent
+					h2
+						| Get notified when we are ready to 
+						strong launch
+				.editContent
+					p.lead
+						a(href='https://creativemarket.com/theme_spirit') Available exclusively at Creative Market
+				form.footer-form(action='#')
+					input(type='text', name='', value='', placeholder='', required='')
+					input(type='submit', name='', value='Send')
+				ul.social.social-light
+					li
+						a(href='#')
+							i.fa.fa-2x.fa-facebook
+					li
+						a(href='#')
+							i.fa.fa-2x.fa-twitter
+					li
+						a(href='#')
+							i.fa.fa-2x.fa-google-plus
+					li
+						a(href='#')
+							i.fa.fa-2x.fa-pinterest
+					li
+						a(href='#')
+							i.fa.fa-2x.fa-behance
+					li
+						a(href='#')
+							i.fa.fa-2x.fa-dribbble
+				// /.social
+			// /.container
+		// // END Footer 1-4
+		include footer

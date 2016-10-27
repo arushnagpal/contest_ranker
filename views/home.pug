@@ -1,0 +1,79 @@
+extends header
+
+
+block content
+
+
+    // Start Content Block 3-4
+    section#content-3-4.content-block.content-3-4
+        .container
+            .row
+                .col-md-7
+                    img.img-responsive(src='images/camera-girl.jpg')
+                    .editContent
+                        h2 Conference competitions tracking
+                    .editContent
+                        p
+                            | Description
+                .col-md-4.col-md-offset-1
+                    #accordion1.panel-group
+                        .panel.panel-default
+                            .panel-heading
+                                h4.panel-title
+                                    a.panel-toggle(data-toggle='collapse', data-parent='#accordion1', href='#content1')
+                                        .editContent
+                                            span Mission Statement
+                            // /.panel-heading
+                            #content1.panel-collapse.collapse.in
+                                .panel-body
+                                    .editContent
+                                        p
+                                            | Our Mission description
+                                // /.panel-body
+                            // /.content
+                        // /.panel
+                        .panel.panel-default
+                            .panel-heading
+                                h4.panel-title
+                                    a.panel-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', href='#content2')
+                                        .editContent
+                                            span Recent Contests
+                            // /.panel-heading
+                            #content2.panel-collapse.collapse
+                                .panel-body
+                                    .editContent
+                                        p
+                                            | List of contests
+                                // /.panel-body
+                            // /.content
+                        // /.panel
+                        .panel.panel-default
+                            .panel-heading
+                                h4.panel-title
+                                    a.panel-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', href='#content3')
+                                        .editContent
+                                            span Contact Details
+                            // /.panel-heading
+                            #content3.panel-collapse.collapse
+                                .panel-body
+                                    .editContent
+                                        h4 DM Images
+                                    .editContent
+                                        p
+                                            | Thapar University,
+                                            br
+                                            |                                            Patiala,
+                                            br
+                                            |                                            LO4 6ON
+                                    // img.img-responsive(src='images/seagulls.jpg')
+                                // /.panel-body
+                            // /.content
+                        // /.panel
+                    // /.accordion
+                // /.column
+            // /.row
+        // /.container
+    // // END Content Block 3-4
+    
+    // // END Footer 1-1
+    include footer

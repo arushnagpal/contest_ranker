@@ -1,0 +1,17 @@
+extends header
+
+
+block content
+
+
+	section.content-block
+			.container
+				h2 Submitting Solutions for ID #{forname}
+				form(ref='uploadForm', action='/submit', method='post', enctype='multipart/form-data')
+					.form-group
+						input.form-control(type='file', name='solution')
+					.form-group
+						input.form-control(type='submit', value='Upload!')
+
+
+	include footer

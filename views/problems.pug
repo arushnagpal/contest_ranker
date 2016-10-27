@@ -1,0 +1,75 @@
+extends header
+
+
+block content
+
+
+	// Start Content Block 3-8
+	section#content-3-8.content-block.content-3-8
+		.container-fluid
+			.col-sm-12
+				.underlined-title.text-left
+					.editContent
+						h1 Contest Name: #{contestdata[0].contest_name}
+					
+					.editContent
+						h2
+							| #{contestdata[0].description}
+					if(contestdata[0].image)
+						.editContent
+							img(src='#{contestdata[0].image}.jpg', alt='Images')
+
+	// // END Content Block 3-8
+	// Start Basic 1-5
+	section#basic-1-5.basic-1-5.content-block
+		h2.underlined-title.text-left Problems
+		.container
+			each item in problemdata
+				.row
+					.col-md-3.col-sm-12
+						.editContent
+							h3 #{item.name}
+						.editContent
+							p
+								strong
+									Time Created: #{item.time_created}
+					.col-md-5.col-sm-12
+						.editContent
+							h3 Description
+						.editContent
+							p
+								| #{item.description}
+							p
+								a.btn.btn-info(href='/contests/'+contestdata[0].contest_id+'/problems/'+item.uid, role='button') View Full Problem
+								//
+									a.btn.btn-info(href='/download/'+item.download_file, role='button') Download data
+					// // #rd Column for Submit
+					.col-md-2.col-sm-12
+						form.form(action='/submitans/'+item.uid, method='POST', role='form',enctype='multipart/form-data')
+							input.form-control(name='answer', placeholder='Your Answer', type='answer')
+							button.btn.btn-sm.btn-primary.btn-block(type='submit')
+								| Submit
+
+					// // 4th column
+					.col-md-2.col-sm-12
+						.editContent
+							h3 Leading:
+							h3 Score: 
+							h3 Submissions: 
+
+						//
+							.editContent
+								p
+									| #{item.description}
+								p
+									a.btn.btn-info(href='/contests/'+item.contest_id, role='button') View Problems
+									//
+										a.btn.btn-info(href='/download/'+item.download_file, role='button') Download data
+				hr
+
+			// /.row
+		// /.container
+	// // END Basic 1-5
+	// Start Footer 1-1
+	// // END Footer 1-1
+	include footer
