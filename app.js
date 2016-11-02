@@ -8,7 +8,16 @@ var port_number = process.env.PORT || 3000;
 var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
-
+var jsonfile = require('jsonfile');
+var file='app_data.json';
+/*if(typeof statistics == 'undefined')
+{
+    jsonfile.readFile(file, function(err, obj) {
+        statistics=obj;
+        console.log(obj[1].name);
+    })
+}
+console.log(statistics[0].name);*/
 app.set("views", "./views");
 app.set('view engine', 'pug');
 
@@ -39,7 +48,6 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-
 
 app.use(function(req, res, next){
     var err = req.session.error;
