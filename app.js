@@ -9,15 +9,15 @@ var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
 var jsonfile = require('jsonfile');
-var file='app_data.json';
-/*if(typeof statistics == 'undefined')
+/*var file='./data/app_data.json';
+if(typeof statistics == 'undefined')
 {
     jsonfile.readFile(file, function(err, obj) {
         statistics=obj;
         console.log(obj[1].name);
     })
-}
-console.log(statistics[0].name);*/
+}*/
+//console.log(statistics[0].name);
 app.set("views", "./views");
 app.set('view engine', 'pug');
 
@@ -149,6 +149,9 @@ app.use("/login", loginRouter);
 var adminRouter = require("./admin");
 app.use("/admin", adminRouter);
 
+var superadminRouter = require("./superadmin");
+app.use("/superadmin", superadminRouter);
+
 var submitRouter = require("./submitans");
 app.use("/submitans", submitRouter);
 
@@ -166,5 +169,5 @@ app.listen(port_number, function () {
 });
 
 app.get('*',function (req, res) {
-        res.render('nopage');
+        res.status(404).render('nopage');
     });

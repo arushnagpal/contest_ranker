@@ -1,4 +1,55 @@
-var uuid = require("node-uuid");
+var express = require("express");
+var router = express.Router();
+var con=require("./database");
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*var uuid = require("node-uuid");
 var _ = require("lodash");
 var express = require("express");
 var rooms = require("./data/rooms.json");
@@ -57,3 +108,4 @@ router.get('/rooms/delete/:id', function (req, res) {
   res.redirect(req.baseUrl + "/rooms");
 });
 
+*/
