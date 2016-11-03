@@ -4,8 +4,15 @@ var con=require("./database");
 module.exports = router;
 
 
+router.route('/')
+.get(function (req, res) {
+  res.redirect('/home');
+});
 
-
+router.route('/home')
+.get(function (req, res) {
+  res.render("superadmin/home", { title : "Home", user_name: req.session.user_name});
+});
 
 
 

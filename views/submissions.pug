@@ -10,13 +10,13 @@ block content
 			h3 My Submissions
 			p Most recent first
 			.col-sm-12
-				table.table.table-bordered
-					thead.thead-inverse
+				table.table.table-bordered.tablesorter#sortthistable
+					THEAD.thead-inverse
 						tr
 							th Problem Name
 							th Calculated Answer
 							th Time Submitted
-					tbody
+					TBODY
 						each item in data
 							tr
 								td #{item.name}

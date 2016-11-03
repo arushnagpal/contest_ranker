@@ -29,6 +29,7 @@ app.use(fileUpload());
 //app.use(serveStatic(__dirname + '/public'))
 //app.use(express.static(__dirname + '/public'));
 app.use('/public',express.static(path.join(__dirname, 'public')));
+app.use('/tablesorter', express.static(__dirname + '/node_modules/tablesorter'));
 /*app.use(express.static("public"));
 app.use(express.static("node_modules/bootstrap/dist"));
 app.use(express.static("node_modules/jquery/dist"));
