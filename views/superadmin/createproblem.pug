@@ -6,7 +6,7 @@ html(lang='en')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
 		meta(name='description', content='')
 		meta(name='author', content='')
-		title Admin Home
+		title Create a Contest | Admin
 		// Bootstrap Core CSS
 		link(href='/admin-css/bootstrap/css/bootstrap.min.css', rel='stylesheet')
 		// MetisMenu CSS
@@ -17,6 +17,7 @@ html(lang='en')
 		link(href='/admin-css/morrisjs/morris.css', rel='stylesheet')
 		// Custom Fonts
 		link(href='/admin-css/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+		link(href='/css/bootstrap-select.min.css', rel='stylesheet', type='text/css')
 		// HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 		// WARNING: Respond.js doesn't work if you view the page via file://
 		//if lt IE 9
@@ -32,7 +33,7 @@ html(lang='en')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='index.html') Hello #{user_name}
+					a.navbar-brand(href='/superadmin/home') Hello #{user_name}
 				// /.navbar-header
 				ul.nav.navbar-top-links.navbar-right
 					li.dropdown
@@ -176,16 +177,16 @@ html(lang='en')
 							i.fa.fa-caret-down
 						ul.dropdown-menu.dropdown-user
 							li
-								a(href='#')
+								a(href='/superadmin/profile')
 									i.fa.fa-user.fa-fw
 									|  User Profile
 							li
-								a(href='#')
+								a(href='/superadmin/settings')
 									i.fa.fa-gear.fa-fw
 									|  Settings
 							li.divider
 							li
-								a(href='login.html')
+								a(href='/superadmin/logout')
 									i.fa.fa-sign-out.fa-fw
 									|  Logout
 						// /.dropdown-user
@@ -207,8 +208,29 @@ html(lang='en')
 									|  Statistics
 							li
 								a(href='/superadmin/createcontest')
-									i.fa.fa-dashboard.fa-fw
+									i.fa.fa-edit.fa-fw
 									|  Create a Contest
+							li
+								a(href='/superadmin/createproblem')
+									i.fa.fa-edit.fa-fw
+									|  Create a Problem
+							li
+								a(href='/superadmin/linkproblemtocontest')
+									i.fa.fa-edit.fa-fw
+									|  Add Problem to Contest
+							li
+								a(href='/superadmin/createcontest')
+									i.fa.fa-edit.fa-fw
+									|  Modify Problems
+							li
+								a(href='/superadmin/createcontest')
+									i.fa.fa-edit.fa-fw
+									|  Modify Contests
+
+							li
+								a(href='/superadmin/livesubmissionstats')
+									i.fa.fa-dashboard.fa-fw
+									|  View Live Submission Stats
 							li
 								a(href='#')
 									i.fa.fa-bar-chart-o.fa-fw
@@ -288,70 +310,40 @@ html(lang='en')
 			#page-wrapper
 				.row
 					.col-lg-12
-						h1.page-header Statistics
+						h1.page-header Create a Problem
+						if locals.message
+							.alert.alert-success
+								a.close(href='#', data-dismiss='alert', aria-label='close') ×
+								strong Success!
+								|  #{locals.message}.
+						if locals.error
+							.alert.alert-danger
+								a.close(href='#', data-dismiss='alert', aria-label='close') ×
+								strong Error!
+								|  #{locals.error}.
+						if inserted
+							.panel.panel-success
+								.panel-heading Further Instructions
+								.panel-body Problem ID: #{inserted}. Now you need to upload image with the name as problem id in the problemimage directory and also upload the code to run the program in functions_data.js file with the same problem id. Thanks.
+
 					// /.col-lg-12
 				// /.row
 				.row
-					.col-lg-3.col-md-6
-						.panel.panel-primary
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-comments.fa-5x
-									.col-xs-9.text-right
-										.huge 26
-										div New Comments!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
-					.col-lg-3.col-md-6
-						.panel.panel-green
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-tasks.fa-5x
-									.col-xs-9.text-right
-										.huge 12
-										div New Tasks!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
-					.col-lg-3.col-md-6
-						.panel.panel-yellow
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-shopping-cart.fa-5x
-									.col-xs-9.text-right
-										.huge 124
-										div New Orders!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
-					.col-lg-3.col-md-6
-						.panel.panel-red
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-support.fa-5x
-									.col-xs-9.text-right
-										.huge 13
-										div Support Tickets!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
+					form(role='form',method='post',action='/superadmin/createproblem',enctype='multipart/form-data')
+						.form-group
+							label Problem Name
+							input.form-control(name='problemname',type='text')
+						.form-group
+							label Problem Statement
+							textarea.form-control(rows='2',name='statement')
+						.form-group
+							label Problem Description
+							textarea.form-control(rows='5',name='description')
+						.form-group
+							label Enter the full name of the image you would like to show for the problem (Enter 'NO' if you dont want to add an image to this problem)
+							input.form-control(name='image',type='text')
+						.form-group
+							input.btn.btn-primary(type='Submit',value='Create!')
 				// /.row	
 			// /#page-wrapper
 		// /#wrapper
@@ -367,3 +359,6 @@ html(lang='en')
 		script(src='/admin-css/data/morris-data.js')
 		// Custom Theme JavaScript
 		script(src='/admin-css/js/sb-admin-2.js')
+		script(src='/js/bootstrap-select.min.js')
+		script(src='/js/selectdefault/defaults-*.min.js')
+

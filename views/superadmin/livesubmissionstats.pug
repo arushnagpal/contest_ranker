@@ -6,7 +6,7 @@ html(lang='en')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
 		meta(name='description', content='')
 		meta(name='author', content='')
-		title Admin Home
+		title Create a Contest | Admin
 		// Bootstrap Core CSS
 		link(href='/admin-css/bootstrap/css/bootstrap.min.css', rel='stylesheet')
 		// MetisMenu CSS
@@ -32,7 +32,7 @@ html(lang='en')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='index.html') Hello #{user_name}
+					a.navbar-brand(href='/superadmin/home') Hello #{user_name}
 				// /.navbar-header
 				ul.nav.navbar-top-links.navbar-right
 					li.dropdown
@@ -176,16 +176,16 @@ html(lang='en')
 							i.fa.fa-caret-down
 						ul.dropdown-menu.dropdown-user
 							li
-								a(href='#')
+								a(href='/superadmin/profile')
 									i.fa.fa-user.fa-fw
 									|  User Profile
 							li
-								a(href='#')
+								a(href='/superadmin/settings')
 									i.fa.fa-gear.fa-fw
 									|  Settings
 							li.divider
 							li
-								a(href='login.html')
+								a(href='/superadmin/logout')
 									i.fa.fa-sign-out.fa-fw
 									|  Logout
 						// /.dropdown-user
@@ -207,8 +207,12 @@ html(lang='en')
 									|  Statistics
 							li
 								a(href='/superadmin/createcontest')
-									i.fa.fa-dashboard.fa-fw
+									i.fa.fa-edit.fa-fw
 									|  Create a Contest
+							li
+								a(href='/superadmin/livesubmissionstats')
+									i.fa.fa-dashboard.fa-fw
+									|  View Live Submission Stats
 							li
 								a(href='#')
 									i.fa.fa-bar-chart-o.fa-fw
@@ -288,70 +292,21 @@ html(lang='en')
 			#page-wrapper
 				.row
 					.col-lg-12
-						h1.page-header Statistics
+						h1.page-header Submissions for #{contest_name}
+						if locals.message
+							.alert.alert-success
+								a.close(href='#', data-dismiss='alert', aria-label='close') ×
+								strong Success!
+								|  #{locals.message}.
+						if locals.error
+							.alert.alert-danger
+								a.close(href='#', data-dismiss='alert', aria-label='close') ×
+								strong Error!
+								|  #{locals.error}.
 					// /.col-lg-12
 				// /.row
 				.row
-					.col-lg-3.col-md-6
-						.panel.panel-primary
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-comments.fa-5x
-									.col-xs-9.text-right
-										.huge 26
-										div New Comments!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
-					.col-lg-3.col-md-6
-						.panel.panel-green
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-tasks.fa-5x
-									.col-xs-9.text-right
-										.huge 12
-										div New Tasks!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
-					.col-lg-3.col-md-6
-						.panel.panel-yellow
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-shopping-cart.fa-5x
-									.col-xs-9.text-right
-										.huge 124
-										div New Orders!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
-					.col-lg-3.col-md-6
-						.panel.panel-red
-							.panel-heading
-								.row
-									.col-xs-3
-										i.fa.fa-support.fa-5x
-									.col-xs-9.text-right
-										.huge 13
-										div Support Tickets!
-							a(href='#')
-								.panel-footer
-									span.pull-left View Details
-									span.pull-right
-										i.fa.fa-arrow-circle-right
-									.clearfix
+					
 				// /.row	
 			// /#page-wrapper
 		// /#wrapper
