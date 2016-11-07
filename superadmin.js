@@ -9,14 +9,117 @@ router.route('/')
   res.redirect('/home');
 });
 
+router.route('/logout')
+.get(function (req, res) {
+  req.session.destroy();
+  res.redirect('/home');
+});
+
 router.route('/home')
 .get(function (req, res) {
   res.render("superadmin/home", { title : "Home", user_name: req.session.user_name});
 });
 
+router.route('/livesubmissionstats/:contestid')
+.get(function (req, res) {
+  var contestid = req.params.contestid;
+  var submissions = 'select user,problem_id,submission_value,answer,time_submitted from submissions where problem_id IN (select problem_id from contest_map where contest_id = '+contestid+')';
+  con.query(problemdetail,function(err,rows){
+    if(err) throw err;
+    else 
+    {
+            res.render("livesubmissionstats", { title: "Live tracking", problemdata:rows[0],user_name: req.session.user_name});
+    }
+    });   
 
+});
 
+router.route('/createcontest')
+.get(function (req, res) {
+  res.render('superadmin/createcontest',{ title: "Create Contest",user_name: req.session.user_name});
+})
+.post(function (req,res) {
+    var contestname=req.body.contestname;
+    var description=req.body.description;
+    var status=req.body.status;
+    var startdate=req.body.startdate;
+    var starttime=req.body.starttime;
+    var enddate=req.body.enddate;
+    var endtime=req.body.endtime;
+    var start=startdate+" "+starttime;
+    var end=enddate+" "+endtime;
+    
+    var sqlstmt = {contest_name: contestname, description: description,status: status,start_date:start,end_date:end};
+    con.query('INSERT INTO contests SET ?', sqlstmt, function(err, result) {
+        if(err)
+        {
+          req.session.error="Error! The contest could not be created.";
+          console.log("Err: "+err);
+          res.redirect('/superadmin/createcontest');
+        }
+        else
+        {
+          req.session.success="Success! The contest has been successfully created!";
+          res.redirect('/superadmin/createcontest');
+        }
+    });
+    return;
+    //res.render('superadmin/createcontest',{ title: "Create Contest",user_name: req.session.user_name});
+});
 
+router.route('/createproblem')
+.get(function (req, res) {
+  res.render('superadmin/createproblem',{ title: "Create Problem",user_name: req.session.user_name});
+})
+.post(function (req,res) {
+    var problemname=req.body.problemname;
+    var statement=req.body.statement;
+    var description=req.body.description;
+    var image=req.body.image;
+    var sqlstmt = {name: problemname,statement:statement, description: description,image: image};
+    con.query('INSERT INTO problems SET ?', sqlstmt, function(err, result) {
+        if(err)
+        {
+          req.session.error="The problem could not be created.";
+          console.log("Err: "+err);
+          res.redirect('/superadmin/createproblem');
+        }
+        else
+        {
+          req.session.success="The problem has been successfully created!";
+          res.render('superadmin/createproblem',{ title: "Create Problem",user_name: req.session.user_name, inserted: result.insertId});
+        }
+    });
+    return;
+    //res.render('superadmin/createcontest',{ title: "Create Contest",user_name: req.session.user_name});
+});
+
+router.route('/linkproblemtocontest')
+.get(function (req, res) {
+  res.render('superadmin/createproblem',{ title: "Create Problem",user_name: req.session.user_name});
+})
+.post(function (req,res) {
+    var problemname=req.body.problemname;
+    var statement=req.body.statement;
+    var description=req.body.description;
+    var image=req.body.image;
+    var sqlstmt = {name: problemname,statement:statement, description: description,image: image};
+    con.query('INSERT INTO problems SET ?', sqlstmt, function(err, result) {
+        if(err)
+        {
+          req.session.error="The problem could not be created.";
+          console.log("Err: "+err);
+          res.redirect('/superadmin/createproblem');
+        }
+        else
+        {
+          req.session.success="The problem has been successfully created!";
+          res.render('superadmin/createproblem',{ title: "Create Problem",user_name: req.session.user_name, inserted: result.insertId});
+        }
+    });
+    return;
+    //res.render('superadmin/createcontest',{ title: "Create Contest",user_name: req.session.user_name});
+});
 
 
 
