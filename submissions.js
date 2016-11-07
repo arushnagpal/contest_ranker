@@ -17,14 +17,14 @@ router.route('/')
          if(err) throw err;
 
             else     
-              res.render("submissions", { title : "My Submissions", data : rows});
+              res.render("submissions", { title : "My Submissions", data : rows,user_name: req.session.user_name});
             console.log(rows);
         });
   });
 router.route('/:cid')
   .get(function (req, res) {
   	var p=req.params.cid;
-    res.render("leaderboard", { title : "Leaderboard for " + p });
+    res.render("leaderboard", { title : "Leaderboard for " + p ,user_name: req.session.user_name});
   })
   .post(function(req, res) {
 });

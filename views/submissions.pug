@@ -8,9 +8,13 @@ block content
 	section#content-3-8.content-block.content-3-8
 		.container
 			h3 My Submissions
+				span.pull-right
+					a(href='#' onclick='reload_submissions()')
+						p Refresh Submissions
+							i.fa.fa-refresh
 			p Most recent first
 			.col-sm-12
-				table.table.table-bordered.tablesorter#sortthistable
+				table.table.table-bordered.tablesorter#sortthistable(data-page-length='4')
 					THEAD.thead-inverse
 						tr
 							th Problem Name
@@ -29,4 +33,10 @@ block content
 	// // END Basic 1-5
 	// Start Footer 1-1
 	// // END Footer 1-1
+	//
+		script(type="text/javascript").
+			setInterval(function() {$('#sortthistable').load(document.URL +  ' #sortthistable');}, 10000);
+	script(type="text/javascript").
+		function reload_submissions(){$('#sortthistable').load(document.URL +  ' #sortthistable');}
+	
 	include footer

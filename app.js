@@ -141,6 +141,9 @@ app.get('/contact', function (req, res) {
 var submitRouter = require("./submit");
 app.use("/submit", submitRouter);
 
+var superadminRouter = require("./superadmin");
+app.use("/superadmin", superadminRouter);
+
 var leaderboardRouter = require("./leaderboard");
 app.use("/leaderboard", leaderboardRouter);
 
@@ -149,9 +152,6 @@ app.use("/login", loginRouter);
 
 var adminRouter = require("./admin");
 app.use("/admin", adminRouter);
-
-var superadminRouter = require("./superadmin");
-app.use("/superadmin", superadminRouter);
 
 var submitRouter = require("./submitans");
 app.use("/submitans", submitRouter);
@@ -170,5 +170,5 @@ app.listen(port_number, function () {
 });
 
 app.get('*',function (req, res) {
-        res.status(404).render('nopage');
+        res.status(404).render('nopage', { title: "404 Not Found", user_name: req.session.user_name});
     });
