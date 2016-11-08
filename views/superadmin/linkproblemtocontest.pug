@@ -310,7 +310,7 @@ html(lang='en')
 			#page-wrapper
 				.row
 					.col-lg-12
-						h1.page-header Create a Problem
+						h1.page-header Link a Problem to Contest
 						if locals.message
 							.alert.alert-success
 								a.close(href='#', data-dismiss='alert', aria-label='close') ×
@@ -329,21 +329,24 @@ html(lang='en')
 					// /.col-lg-12
 				// /.row
 				.row
-					form(role='form',method='post',action='/superadmin/createproblem',enctype='multipart/form-data')
+					h5 Please note that only those problems will be showed which have not been linked or have their status set has archived
+					br
+					form(role='form',method='post',action='/superadmin/linkproblemtocontest',enctype='multipart/form-data')
+						.col-md-6
+							.form-group
+								label Problem Name
+								select.selectpicker(data-live-search='true',name='problem')
+									each item in problemdata
+										<option value= #{item.uid}>#{item.name}</option>
+						.col-md-6
+							.form-group
+								label Contest Name
+								select.selectpicker(data-live-search='true',name='contest')
+									each item in contestdata
+										<option value= #{item.contest_id}>#{item.contest_name}</option>
 						.form-group
-							label Problem Name
-							input.form-control(name='problemname',type='text')
-						.form-group
-							label Problem Statement
-							textarea.form-control(rows='2',name='statement')
-						.form-group
-							label Problem Description
-							textarea.form-control(rows='5',name='description')
-						.form-group
-							label Enter the full name of the image you would like to show for the problem (Enter 'NO' if you dont want to add an image to this problem)
-							input.form-control(name='image',type='text')
-						.form-group
-							input.btn.btn-primary(type='Submit',value='Create!')
+							input.btn.btn-primary(type='submit' value='Add It!')
+					
 				// /.row	
 			// /#page-wrapper
 		// /#wrapper

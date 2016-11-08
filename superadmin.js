@@ -96,25 +96,36 @@ router.route('/createproblem')
 
 router.route('/linkproblemtocontest')
 .get(function (req, res) {
-  res.render('superadmin/createproblem',{ title: "Create Problem",user_name: req.session.user_name});
+  var contests = 'SELECT contest_id,contest_name FROM contests';
+  var unlinkedproblems = 'SELECT uid,name FROM problems where problems.uid NOT IN (SELECT problem_id from contest_map)';
+  con.query(contests+' ; '+unlinkedproblems,function(err,rows){
+     if(err) throw err;
+
+     else 
+     {
+              //console.log(rows[0]);
+              //console.log(rows[1]);
+              res.render('superadmin/linkproblemtocontest', { title: "Link Problems", contestdata: rows[0],problemdata:rows[1],user_name: req.session.user_name});
+          }
+          //console.log(rows);
+      });
+  //res.render('superadmin/linkproblemtocontest',{ title: "Create Problem",user_name: req.session.user_name});
 })
 .post(function (req,res) {
-    var problemname=req.body.problemname;
-    var statement=req.body.statement;
-    var description=req.body.description;
-    var image=req.body.image;
-    var sqlstmt = {name: problemname,statement:statement, description: description,image: image};
-    con.query('INSERT INTO problems SET ?', sqlstmt, function(err, result) {
+    var problem=req.body.problem;
+    var contest=req.body.contest;
+    var sqlstmt = {contest_id: contest,problem_id: problem};
+    con.query('INSERT INTO contest_map SET ?', sqlstmt, function(err, result) {
         if(err)
         {
-          req.session.error="The problem could not be created.";
+          req.session.error="The problem could not be linked. Some Error. Please check again";
           console.log("Err: "+err);
-          res.redirect('/superadmin/createproblem');
+          res.redirect('/superadmin/linkproblemtocontest');
         }
         else
         {
-          req.session.success="The problem has been successfully created!";
-          res.render('superadmin/createproblem',{ title: "Create Problem",user_name: req.session.user_name, inserted: result.insertId});
+          req.session.success="The problem has been successfully added to the contest!";
+          res.redirect('/superadmin/linkproblemtocontest');
         }
     });
     return;
