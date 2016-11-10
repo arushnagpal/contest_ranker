@@ -13,7 +13,7 @@ console.log(m[a](arr,3));
 */
 //console.log(new Date().toISOString());
 var moment=require("moment");
-console.log(moment(new Date().toISOString()).calendar());
+console.log(moment(new Date('').toISOString()).calendar());
 //console.log(moment(new Date().toISOString()).isValid());
 
 /*var jsonfile = require('jsonfile')
