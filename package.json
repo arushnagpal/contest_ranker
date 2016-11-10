@@ -8,6 +8,7 @@
   },
   "repository": "https://github.com/arushnagpal/contest_ranker.git",
   "dependencies": {
+    "ave": "0.0.1-0",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "client-sessions": "^0.7.0",
@@ -24,6 +25,7 @@
     "jsonfile": "^2.4.0",
     "lodash": "^4.5.1",
     "materialize-css": "^0.97.7",
+    "moment": "^2.16.0",
     "morgan": "^1.6.1",
     "mysql": "^2.11.1",
     "node-mysql": "^0.4.2",

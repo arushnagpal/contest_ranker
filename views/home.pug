@@ -20,30 +20,100 @@ block content
                         .panel.panel-default
                             .panel-heading
                                 h4.panel-title
-                                    a.panel-toggle(data-toggle='collapse', data-parent='#accordion1', href='#content1')
+                                    a.panel-toggle(data-toggle='collapse', data-parent='#accordion1', href='#content2')
                                         .editContent
-                                            span Mission Statement
+                                            span Active Contests
                             // /.panel-heading
-                            #content1.panel-collapse.collapse.in
+                            #content2.panel-collapse.collapse.in
                                 .panel-body
                                     .editContent
-                                        p
-                                            | Our Mission description
+                                        #accordion.panel-group
+                                            if(active[0])
+                                                .panel.panel-default
+                                                    .panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseOne1') #{active[0].contest_name}
+                                                    #collapseOne1.panel-collapse.collapse
+                                                        .panel-body
+                                                            | #{active[0].descr}
+                                                            br
+                                                            a(href='/contests/'+active[0].contest_id+'/problems') See Details
+                                            if(active[1])
+                                                .panel.panel-default
+                                                    .panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo1') #{active[0].contest_name}
+                                                    #collapseTwo1.panel-collapse.collapse
+                                                        .panel-body
+                                                            | #{active[1].descr}
+                                                            br
+                                                            a(href='/contests/'+active[1].contest_id+'/problems') See Details
+                                            if(active[2])
+                                                .panel.panel-default
+                                                    .panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseThree1') #{active[2].contest_name}
+                                                    #collapseThree1.panel-collapse.collapse
+                                                        .panel-body
+                                                            | #{active[2].descr}
+                                                            br
+                                                            a(href='/contests/'+active[2].contest_id+'/problems') See Details
+                                            if(!active[0])
+                                                p Sorry! No active contests currently
+
                                 // /.panel-body
                             // /.content
                         // /.panel
                         .panel.panel-default
                             .panel-heading
                                 h4.panel-title
-                                    a.panel-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', href='#content2')
+                                    a.panel-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', href='#content1')
                                         .editContent
-                                            span Recent Contests
+                                            span Upcoming Contests
                             // /.panel-heading
-                            #content2.panel-collapse.collapse
+                            #content1.panel-collapse.collapse
                                 .panel-body
                                     .editContent
-                                        p
-                                            | List of contests
+                                        #accordion.panel-group
+                                            if(upcoming[0])
+                                                .panel.panel-default
+                                                    .panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseOne') #{upcoming[0].contest_name}
+                                                    #collapseOne.panel-collapse.collapse
+                                                        .panel-body
+                                                            | #{upcoming[0].descr}
+                                                            br
+                                                            | Starts on :#{upcoming[0].start_date}
+                                                            br
+                                                            a(href='/contests/'+upcoming[0].contest_id+'/problems') See Details
+                                            if(upcoming[1])
+                                                .panel.panel-default
+                                                    .panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo') #{upcoming[0].contest_name}
+                                                    #collapseTwo.panel-collapse.collapse
+                                                        .panel-body
+                                                            | #{upcoming[1].descr}
+                                                            br
+                                                            | Starts on :#{upcoming[1].start_date}
+                                                            br
+                                                            a(href='/contests/'+upcoming[1].contest_id+'/problems') See Details
+                                            if(upcoming[2])
+                                                .panel.panel-default
+                                                    .panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseThree') #{upcoming[2].contest_name}
+                                                    #collapseThree.panel-collapse.collapse
+                                                        .panel-body
+                                                            | #{upcoming[2].descr}
+                                                            br
+                                                            | Starts on :#{upcoming[2].start_date}
+                                                            br
+                                                            a(href='/contests/'+upcoming[2].contest_id+'/problems') See Details
+                                            if(!upcoming[0])
+                                                p Sorry! No contests coming recently
+
                                 // /.panel-body
                             // /.content
                         // /.panel
@@ -73,6 +143,7 @@ block content
                 // /.column
             // /.row
         // /.container
+
     // // END Content Block 3-4
     
     // // END Footer 1-1

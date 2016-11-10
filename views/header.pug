@@ -123,13 +123,23 @@ html
 						// Collect the nav links, forms, and other content for toggling
 						#navbar-collapse.collapse.navbar-collapse
 							ul.nav.navbar-nav.navbar-right
-								li.nav-item.active
-									a(href='/home') Home
+								if(title== 'Home')
+									li.nav-item.active
+										a(href='/home') Home
+								else
+									li.nav-item
+										a(href='/home') Home
+							
 								//
 									li.nav-item
 										a(href='/') Launch
-								li.nav-item
-									a(href='/pricing') Pricing
+								if(title=='Pricing')
+									li.nav-item.active
+										a(href='/pricing') Pricing
+								else
+									li.nav-item
+										a(href='/pricing') Pricing
+								
 								li.nav-item
 									a(href='/leaderboard') Leaderboard
 								li.nav-item.dropdown
@@ -145,12 +155,13 @@ html
 								//
 									li.nav-item
 										a(href='/contact') Contact
-								li.nav-item
-									a(href='/about') About Us
-								//
+								if(title=='About Us')
+									li.nav-item.active
+										a(href='/about') About Us
+								else
 									li.nav-item
-										button.btn.btn-primary.btn-sm
-											a(href='/login') Login
+										a(href='/about') About Us
+								
 								if user_name
 									li.nav-item.dropdown
 										a.dropdown-toggle(data-toggle='dropdown', data-hover='dropdown', data-delay='0', data-close-others='false', href='/contests')
@@ -169,12 +180,12 @@ html
 										li.nav-item
 											a(href='#') Welcome #{user_name}
 										li.nav-item
-											a.btn.btn-primary.btn-sm(type='button' href='/logout') Logout
+											a(href='/logout') Logout
 								else
 									li.nav-item
-										a.btn.btn-primary.btn-sm(href='/login') Login
+										a(href='/login') Login
 									li.nav-item
-										a.btn.btn-primary.btn-sm(type='button' href='/signup') Sign Up
+										a(type='button' href='/signup') Sign Up
 						// /.navbar-collapse
 					// /.container-fluid
 			// // End HEADER 2

@@ -66,10 +66,28 @@ app.get('/', function (req, res) {
     res.render("index", { title: "Landing Page", user_name: req.session.user_name});
 });
 app.get('/about', function (req, res) {
-    res.render("aboutus", { title: "About Us", user_name: req.session.user_name});
+    var querystr='SELECT start_date from contests LIMIT 1';
+    con.query(querystr,function(err, rows){
+        console.log(rows[0].start_date);
+
+        res.render("aboutus", { title: "About Us", user_name: req.session.user_name, data:rows});
+    });
 });
 app.get('/home', function (req, res) {
-    res.render("home", { title: "Home", user_name: req.session.user_name});
+    var querystringupcoming='SELECT contest_id,contest_name,start_date,substring(description,1,70) as descr FROM contests WHERE START_DATE > NOW() ORDER BY START_DATE LIMIT 3';
+    var querystringactive='SELECT contest_id,contest_name,substring(description,1,70) as descr FROM contests WHERE END_DATE > NOW() and START_DATE < NOW() ORDER BY START_DATE LIMIT 3';
+    var querystringarchived='SELECT contest_id,contest_name,end_date,substring(description,1,70) as descr FROM contests where status="ARCHIVED"';
+    var runquery=con.query(querystringupcoming+';'+querystringactive+';'+querystringarchived,function(err,rows){
+    if(err){
+        console.log('Err:'+err);
+       }
+    else {
+        var options = {weekday: "long", year: "numeric", month: "short",day: "numeric", hour: "2-digit", minute: "2-digit"};
+        for(i=0;i<rows[0].length;i++)
+            rows[0][i].start_date=rows[0][i].start_date.toLocaleTimeString("en-us", options);
+        res.render("home", { title: "Home", user_name: req.session.user_name, upcoming:rows[0], active:rows[1],archived:rows[2]});
+    }
+    });
 });
 app.get('/pricing', function (req, res) {
     res.render("pricing", { title: "Pricing", user_name: req.session.user_name});
