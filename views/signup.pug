@@ -16,42 +16,25 @@ block content
 					strong Error!
 					|  #{locals.error}.
 					
-			.row
-				.col-xs-12.col-sm-12.col-md-4.well.well-sm
-					legend
-						a(href='http://www.jquery2dotnet.com')
-							i.glyphicon.glyphicon-globe
-						|  Sign up!
-					form.form(action='/signup', method='POST', role='form',enctype='multipart/form-data')
-						.row
-							.col-xs-6.col-md-6
-								input.form-control(name='firstname', placeholder='First Name', type='text', required='')
-							.col-xs-6.col-md-6
-								input.form-control(name='lastname', placeholder='Last Name', type='text', required='')
-						input.form-control(name='email', placeholder='Your Email', type='email')
-						input.form-control(name='password', placeholder='New Password', type='password')
-						//
-							label(for='')
-								| Birth Date
-							.row
-								.col-xs-4.col-md-4
-									select.form-control
-										option(value='Month') Month
-								.col-xs-4.col-md-4
-									select.form-control
-										option(value='Day') Day
-								.col-xs-4.col-md-4
-									select.form-control
-										option(value='Year') Year
-						label.radio-inline
-							input#inlineCheckbox1(type='radio', name='sex', value='male')
-							|                 Male
-						label.radio-inline
-							input#inlineCheckbox2(type='radio', name='sex', value='female')
-							|                 Female
+			.loginmodal-container
+						h1 Sign Up for an Account
 						br
-						br
-						button.btn.btn-lg.btn-primary.btn-block(type='submit')
-							| Sign up
+						form(action='/signup', method='POST', role='form',enctype='multipart/form-data')
+							input(type='text', name='firstname', placeholder='First Name' required)
+							input(type='text', name='lastname', placeholder='Last Name' required)
+							input(type='email', name='email', placeholder='Email' required)
+							input(type='password', name='password', placeholder='Password' required)
+							.col-md-6.col-sm-6
+								| Male :
+								input(type='radio', name='sex', value='male' required)
+							.col-md-6.col-sm-6
+								| Female :
+								input(type='radio', name='sex', value='female' required)
+							input.login.loginmodal-submit(type='submit', name='login', value='Login')
+						.login-help
+							a(href='/login') Login
+							|  - 
+							a(href='/forgotpassword') Forgot Password	
+			
 
 	include footer
