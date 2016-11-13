@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var con=require("./database");
+var con=require("./database");  
 var functionmodel = require('./functions_data.js');
 module.exports = router;
 
@@ -19,18 +19,27 @@ router.route('/:uid')
     var arr=answer.split(" ");
     //console.log(arr);
     //console.log(req.session.emailid);
-    functionmodel[problemid](arr,3,function(ans){
-        //console.log(ans);
-        var sqlstmt = {user: req.session.emailid, problem_id: problemid,answer: ans,submission_value:answer};
-        con.query('INSERT INTO submissions SET ?', sqlstmt, function(err, result) {
-            if(err) throw err;
-            else
-            {
-                req.session.success="Success! Your answer has been successfully submitted!";
-                res.redirect('/contests/all');
-            }
-        });
+    var sqlstmt="SELECT dimension from problems where uid= "+problemid;
+    con.query(sqlstmt,function(err,rows){
+        if(err)
+            throw err;
+        else
+        {
+            functionmodel[problemid](arr,rows[0].dimension,function(ans){
+                //console.log(ans);
+                var sqlstmt = {user: req.session.emailid, problem_id: problemid,answer: ans,submission_value:answer};
+                con.query('INSERT INTO submissions SET ?', sqlstmt, function(err, result) {
+                    if(err) throw err;
+                    else
+                    {
+                        req.session.success="Success! Your answer has been successfully submitted!";
+                        res.redirect('/contests/all');
+                    }
+                });
+            });
+        }
     });
+    
 /*    var problemdetail = 'SELECT * FROM problems where uid = '+ problem_id;
     //console.log(problemdetail);
     con.query(problemdetail,function(err,rows){

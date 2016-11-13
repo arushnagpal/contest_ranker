@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var con=require("./database");
+var moment=require("moment");
 module.exports = router;
 
 
@@ -17,8 +18,11 @@ router.route('/:id/problems/:uid')
     var problemdetail = 'SELECT * FROM problems where uid = '+ problem_id;
     //console.log(problemdetail);
     con.query(problemdetail,function(err,rows){
-       if(err) throw err;
-
+       if(err) 
+       {
+        console.log("Err: "+err);
+        return;
+       }
        else 
        {
                 //console.log(rows[0]);
@@ -54,14 +58,25 @@ router.route('/:id')
     var abc=req.params.id;
     if(abc=='all')
     {
-        con.query('SELECT distinct contest_id,contest_name,description,start_date,end_date FROM contests where status="ACTIVE";SELECT distinct contest_id,contest_name,description,start_date,end_date FROM contests where status="ARCHIVED";',function(err,rows){
+        con.query('SELECT distinct contest_id,contest_name,description,start_date,end_date FROM contests where status="ACTIVE";SELECT distinct contest_id,contest_name,description,start_date,end_date FROM contests where status="ARCHIVED"',function(err,rows){
            if(err) 
-            throw err;
+            console.log("Err:"+ err);
            else{
+            for(i=0;i<rows[0].length;i++){
+              rows[0][i].start_date=new Date(rows[0][i].start_date);
+              rows[0][i].start_date=rows[0][i].start_date.toISOString();
+              rows[0][i].start_date=moment(rows[0][i].start_date).calendar();
+              rows[0][i].end_date=new Date(rows[0][i].end_date);
+              rows[0][i].end_date=rows[0][i].end_date.toISOString();
+              rows[0][i].end_date=moment(rows[0][i].end_date).calendar();
+            }
             for(i=0;i<rows[1].length;i++){
-              rows[1][i].start_date=new Date(rows[1][i].end_date);
-              rows[1][i].start_date=rows[1][i].start_date.toISOString();
-              rows[1][i].start_date=moment(rows[1][i].end_date).calendar();
+              rows[1][i].start_date=new Date(rows[1][i].start_date);
+              //rows[1][i].start_date=rows[0][i].start_date.toISOString();
+              rows[1][i].start_date=moment(rows[1][i].start_date.toISOString()).calendar();
+              rows[1][i].end_date=new Date(rows[1][i].end_date);
+              rows[1][i].end_date=rows[1][i].end_date.toISOString();
+              rows[1][i].end_date=moment(rows[1][i].end_date).calendar();
             }
             res.render("contests", { title: "Contests", data: rows[0],data2:rows[1],user_name: req.session.user_name});
           }//console.log(rows);

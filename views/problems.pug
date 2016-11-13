@@ -7,6 +7,10 @@ block content
 	// Start Content Block 3-8
 	section#content-3-8.content-block.content-3-8
 		.container-fluid
+			if !user_name
+				.alert.alert-info
+					strong Important!
+					|  You are not logged in and you won't be able to submit answers to this contest without authentication.
 			.col-sm-12
 				.underlined-title.text-left
 					.editContent
@@ -39,14 +43,19 @@ block content
 						.editContent
 							p
 								| #{item.description}
+								br
+								| Dimension: #{item.dimension}
 							p
 								a.btn.btn-info(href='/contests/'+contestdata[0].contest_id+'/problems/'+item.uid, role='button') View Full Problem
 								//
 									a.btn.btn-info(href='/download/'+item.download_file, role='button') Download data
 					// // #rd Column for Submit
 					.col-md-2.col-sm-12
-						form.form(action='/submitans/'+item.uid, method='POST', role='form',enctype='multipart/form-data')
-							input.form-control(name='answer', placeholder='Your Answer', type='answer')
+						form.form(onsubmit='return validate('+item.dimension+')' ,action='/submitans/'+item.uid, method='POST', role='form',enctype='multipart/form-data')
+							input.form-control(onkeyup='return validate('+item.dimension+')' name='answer' id='answer', placeholder='Your Answer', type='answer')
+							.controls
+								span.help-inline#showerror
+
 							button.btn.btn-sm.btn-primary.btn-block(type='submit')
 								| Submit
 
@@ -72,4 +81,22 @@ block content
 	// // END Basic 1-5
 	// Start Footer 1-1
 	// // END Footer 1-1
+	script(type='text/javascript').
+		function validate(dim)
+		{
+		var ans=document.getElementById('answer').value;
+		var arr=ans.split(" ");
+		if(arr.length==dim)
+		{
+		document.getElementById('showerror').innerHTML='';
+		return (true);
+		}
+		else
+		{
+		document.getElementById('showerror').innerHTML='Please submit your answer in the correct dimension';
+		document.getElementById('answer').focus();
+		return (false);
+		}
+		}
+
 	include footer

@@ -12,13 +12,13 @@ router.route('/')
       return;
     }
     var sqlstmt="SELECT submissions.answer,submissions.time_submitted,problems.name FROM submissions,problems where submissions.problem_id=problems.uid and submissions.user=" + "'"+req.session.emailid+"' order by submissions.time_submitted DESC";
-       console.log(sqlstmt);
+       //console.log(sqlstmt);
         con.query(sqlstmt,function(err,rows){
          if(err) throw err;
 
             else     
               res.render("submissions", { title : "My Submissions", data : rows,user_name: req.session.user_name});
-            console.log(rows);
+            //console.log(rows);
         });
   });
 router.route('/:cid')

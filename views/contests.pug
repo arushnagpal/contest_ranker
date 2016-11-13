@@ -21,20 +21,22 @@ block content
 			.col-sm-12
 				.underlined-title.text-left
 					.editContent
-						h1.bg-info.text-center Active Contests
+						h1.text-center All Contests
 	// // END Content Block 3-8
 	// Start Basic 1-5
 	section#basic-1-5.basic-1-5.content-block
 		.container
 			each item in data
-				.row
+				.row.well
 					.col-md-4.col-sm-12
 						.editContent
 							h2 #{item.contest_name}
 						.editContent
 							p
 								strong
-									Time Created: #{item.time_created}
+									| Starts: #{item.start_date}
+									br
+									| Ends: #{item.end_date} 
 					.col-md-8.col-sm-12
 						.editContent
 							h2 Description
@@ -51,20 +53,22 @@ block content
 			.col-sm-12
 				.underlined-title.text-left
 					.editContent
-						h1.bg-info.text-center Archived Contests
+						h1.text-center Archived Contests
 	// // END Content Block 3-8
 	// Start Basic 1-5
 	section#basic-1-5.basic-1-5.content-block
 		.container
 			each item in data2
-				.row
+				.row.well
 					.col-md-4.col-sm-12
 						.editContent
 							h2 #{item.contest_name}
 						.editContent
 							p
 								strong
-									Time Created: #{item.time_created}
+									| Starts: #{item.start_date}
+									br
+									| Ends: #{item.end_date} 
 					.col-md-8.col-sm-12
 						.editContent
 							h2 Description

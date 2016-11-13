@@ -9,7 +9,7 @@ module.exports =
      		fn(ans);
      	},
      119: function(arr,D,fn) {
-     		var ans=1;
+     		var ans=0;
      		for(i=0;i<D;i++)
      		{
      			ans+=Math.abs(arr[i]);
