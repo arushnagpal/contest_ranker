@@ -57,7 +57,7 @@ router.route('/:id')
         con.query('SELECT distinct contest_id,contest_name,description,time_created FROM contests',function(err,rows){
            if(err) throw err;
 
-           else res.render("contests", { title: "Contests", data: rows,user_name: req.session.user_name});
+           else res.render("contests", { title: "Contests", data: rows,data2:'',user_name: req.session.user_name});
             //console.log(rows);
         });
     }

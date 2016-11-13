@@ -9,6 +9,7 @@ var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
 var jsonfile = require('jsonfile');
+var moment=require("moment");
 /*var file='./data/app_data.json';
 if(typeof statistics == 'undefined')
 {
@@ -66,25 +67,33 @@ app.get('/', function (req, res) {
     res.render("index", { title: "Landing Page", user_name: req.session.user_name});
 });
 app.get('/about', function (req, res) {
-    var querystr='SELECT start_date from contests LIMIT 1';
-    con.query(querystr,function(err, rows){
-        console.log(rows[0].start_date);
-
-        res.render("aboutus", { title: "About Us", user_name: req.session.user_name, data:rows});
-    });
+    res.render("aboutus", { title: "About Us", user_name: req.session.user_name});
 });
 app.get('/home', function (req, res) {
     var querystringupcoming='SELECT contest_id,contest_name,start_date,substring(description,1,70) as descr FROM contests WHERE START_DATE > NOW() ORDER BY START_DATE LIMIT 3';
-    var querystringactive='SELECT contest_id,contest_name,substring(description,1,70) as descr FROM contests WHERE END_DATE > NOW() and START_DATE < NOW() ORDER BY START_DATE LIMIT 3';
-    var querystringarchived='SELECT contest_id,contest_name,end_date,substring(description,1,70) as descr FROM contests where status="ARCHIVED"';
+    var querystringactive='SELECT contest_id,contest_name,end_date,substring(description,1,70) as descr FROM contests WHERE END_DATE > NOW() and START_DATE < NOW() ORDER BY START_DATE LIMIT 3';
+    var querystringarchived='SELECT contest_id,contest_name,substring(description,1,70) as descr FROM contests where status="ARCHIVED"';
     var runquery=con.query(querystringupcoming+';'+querystringactive+';'+querystringarchived,function(err,rows){
     if(err){
         console.log('Err:'+err);
        }
     else {
-        var options = {weekday: "long", year: "numeric", month: "short",day: "numeric", hour: "2-digit", minute: "2-digit"};
         for(i=0;i<rows[0].length;i++)
-            rows[0][i].start_date=rows[0][i].start_date.toLocaleTimeString("en-us", options);
+        {
+            //console.log(rows[0][i].start_date,rows[0][i].contest_id);
+            rows[0][i].start_date=new Date(rows[0][i].start_date);
+            //console.log(rows[0][i].start_date);
+            rows[0][i].start_date=rows[0][i].start_date.toISOString();
+            //console.log(rows[0][i].start_date);
+            rows[0][i].start_date=moment(rows[0][i].start_date).calendar();
+            //console.log('End');
+        }
+        for(i=0;i<rows[1].length;i++)
+        {   rows[1][i].start_date=new Date(rows[1][i].end_date);
+            rows[1][i].start_date=rows[1][i].start_date.toISOString();
+            rows[1][i].start_date=moment(rows[1][i].end_date).calendar();
+            //console.log(rows[1][i].start_date);
+        }    
         res.render("home", { title: "Home", user_name: req.session.user_name, upcoming:rows[0], active:rows[1],archived:rows[2]});
     }
     });

@@ -11,7 +11,7 @@ router.route('/')
   res.redirect('/home');
 }
 else
- res.render("login", { title : "Home", user_name: req.session.user_name});
+ res.render("login", { title : "Login", user_name: req.session.user_name});
 })
 .post(function (req, res) {
   var password=req.body.password;
