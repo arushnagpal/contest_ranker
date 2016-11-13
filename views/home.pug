@@ -84,7 +84,7 @@ block content
                                                         .panel-body
                                                             | #{upcoming[0].descr}
                                                             br
-                                                            | Starts on :#{upcoming[0].start_date}
+                                                            | Starts: #{upcoming[0].start_date}
                                                             br
                                                             a(href='/contests/'+upcoming[0].contest_id+'/problems') See Details
                                             if(upcoming[1])
@@ -96,7 +96,7 @@ block content
                                                         .panel-body
                                                             | #{upcoming[1].descr}
                                                             br
-                                                            | Starts on :#{upcoming[1].start_date}
+                                                            | Starts: #{upcoming[1].start_date}
                                                             br
                                                             a(href='/contests/'+upcoming[1].contest_id+'/problems') See Details
                                             if(upcoming[2])
@@ -108,7 +108,7 @@ block content
                                                         .panel-body
                                                             | #{upcoming[2].descr}
                                                             br
-                                                            | Starts on :#{upcoming[2].start_date}
+                                                            | Starts: #{upcoming[2].start_date}
                                                             br
                                                             a(href='/contests/'+upcoming[2].contest_id+'/problems') See Details
                                             if(!upcoming[0])

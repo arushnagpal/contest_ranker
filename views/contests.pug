@@ -21,19 +21,42 @@ block content
 			.col-sm-12
 				.underlined-title.text-left
 					.editContent
-						h1 Active Contests
-					//
-						hr
-						.editContent
-							h2
-								| You'll 
-								span.fa.fa-heart.pomegranate
-								|  Bootstrap Starter Kit
+						h1.bg-info.text-center Active Contests
 	// // END Content Block 3-8
 	// Start Basic 1-5
 	section#basic-1-5.basic-1-5.content-block
 		.container
 			each item in data
+				.row
+					.col-md-4.col-sm-12
+						.editContent
+							h2 #{item.contest_name}
+						.editContent
+							p
+								strong
+									Time Created: #{item.time_created}
+					.col-md-8.col-sm-12
+						.editContent
+							h2 Description
+						.editContent
+							p
+								| #{item.description}
+							p
+								a.btn.btn-info(href='/contests/'+item.contest_id, role='button') View Problems
+								//
+									a.btn.btn-info(href='/download/'+item.download_file, role='button') Download data
+
+	section#archived.content-block.content-3-8
+		.container
+			.col-sm-12
+				.underlined-title.text-left
+					.editContent
+						h1.bg-info.text-center Archived Contests
+	// // END Content Block 3-8
+	// Start Basic 1-5
+	section#basic-1-5.basic-1-5.content-block
+		.container
+			each item in data2
 				.row
 					.col-md-4.col-sm-12
 						.editContent

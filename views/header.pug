@@ -140,17 +140,32 @@ html
 									li.nav-item
 										a(href='/pricing') Pricing
 								
-								li.nav-item
-									a(href='/leaderboard') Leaderboard
-								li.nav-item.dropdown
-									a.dropdown-toggle(data-toggle='dropdown', data-hover='dropdown', data-delay='0', data-close-others='false', href='/contests')
-										| Contests
-										i.fa.fa-angle-down
-									ul.dropdown-menu
-										li
-											a(href='/contests/all') Active Contests
-										li
-											a(href='/contests/all') Archived Contests
+								if(title=='Leaderboard')
+									li.nav-item.active
+										a(href='/leaderboard') Leaderboard
+								else
+									li.nav-item
+										a(href='/leaderboard') Leaderboard
+								if(title=='Contests')
+									li.nav-item.dropdown.active
+										a.dropdown-toggle(data-toggle='dropdown', data-hover='dropdown', data-delay='0', data-close-others='false', href='/contests')
+											| Contests
+											i.fa.fa-angle-down
+										ul.dropdown-menu
+											li
+												a(href='/contests/all') Active Contests
+											li
+												a(href='/contests/all#archived') Archived Contests
+								else
+									li.nav-item.dropdown
+										a.dropdown-toggle(data-toggle='dropdown', data-hover='dropdown', data-delay='0', data-close-others='false', href='/contests')
+											| Contests
+											i.fa.fa-angle-down
+										ul.dropdown-menu
+											li
+												a(href='/contests/all') Active Contests
+											li
+												a(href='/contests/all#archived') Archived Contests
 								// /.dropdown
 								//
 									li.nav-item
@@ -182,10 +197,18 @@ html
 										li.nav-item
 											a(href='/logout') Logout
 								else
-									li.nav-item
-										a(href='/login') Login
-									li.nav-item
-										a(type='button' href='/signup') Sign Up
+									if(title=='Login')
+										li.nav-item.active
+											a(href='/login') Login
+									else
+										li.nav-item
+											a(href='/login') Login
+									if(title=='Sign Up')
+										li.nav-item.active
+											a(href='/signup') Sign Up
+									else
+										li.nav-item
+											a(href='/signup') Sign Up
 						// /.navbar-collapse
 					// /.container-fluid
 			// // End HEADER 2
