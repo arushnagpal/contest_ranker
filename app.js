@@ -89,10 +89,10 @@ app.get('/home', function (req, res) {
             //console.log('End');
         }
         for(i=0;i<rows[1].length;i++)
-        {   rows[1][i].start_date=new Date(rows[1][i].end_date);
-            rows[1][i].start_date=rows[1][i].start_date.toISOString();
-            rows[1][i].start_date=moment(rows[1][i].end_date).calendar();
-            //console.log(rows[1][i].start_date);
+        {   rows[1][i].end_date=new Date(rows[1][i].end_date);
+            rows[1][i].end_date=rows[1][i].end_date.toISOString();
+            rows[1][i].end_date=moment(rows[1][i].end_date).calendar();
+            //console.log(rows[1][i].end_date);
         }    
         res.render("home", { title: "Home", user_name: req.session.user_name, upcoming:rows[0], active:rows[1],archived:rows[2]});
     }

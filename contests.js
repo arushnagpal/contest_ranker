@@ -54,11 +54,17 @@ router.route('/:id')
     var abc=req.params.id;
     if(abc=='all')
     {
-        con.query('SELECT distinct contest_id,contest_name,description,time_created FROM contests',function(err,rows){
-           if(err) throw err;
-
-           else res.render("contests", { title: "Contests", data: rows,data2:'',user_name: req.session.user_name});
-            //console.log(rows);
+        con.query('SELECT distinct contest_id,contest_name,description,start_date,end_date FROM contests where status="ACTIVE";SELECT distinct contest_id,contest_name,description,start_date,end_date FROM contests where status="ARCHIVED";',function(err,rows){
+           if(err) 
+            throw err;
+           else{
+            for(i=0;i<rows[1].length;i++){
+              rows[1][i].start_date=new Date(rows[1][i].end_date);
+              rows[1][i].start_date=rows[1][i].start_date.toISOString();
+              rows[1][i].start_date=moment(rows[1][i].end_date).calendar();
+            }
+            res.render("contests", { title: "Contests", data: rows[0],data2:rows[1],user_name: req.session.user_name});
+          }//console.log(rows);
         });
     }
     else
