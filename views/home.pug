@@ -7,6 +7,11 @@ block content
     // Start Content Block 3-4
     section#content-3-4.content-block.content-3-4
         .container
+            if locals.message
+                .alert.alert-success
+                    a.close(href='#', data-dismiss='alert', aria-label='close') ×
+                    strong Success!
+                    |  #{locals.message}.
             .row
                 .col-md-7
                     img.img-responsive(src='images/camera-girl.jpg')
@@ -158,12 +163,12 @@ block content
                 h2
                     | Subscribe for 
                     strong Updates
-            //
-                .editContent
-                    p.lead
-                        a(href='#') Available exclusively at Android Market
-            form.footer-form(action='#')
-                input(type='text', name='', value='Your Email', placeholder='', required='')
+            
+            .editContent
+                p.lead
+                    a(href='#') Get all updates about contests and the website on yur email account
+            form.footer-form(action='/home', method='POST', role='form' ,enctype='multipart/form-data')
+                input(type='email', name='email', placeholder='Your Email', required='')
                 input(type='submit', name='', value='Subscribe')
     // // END Content Block 3-4
     

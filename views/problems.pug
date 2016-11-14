@@ -29,14 +29,16 @@ block content
 		h2.underlined-title.text-left Problems
 		.container
 			each item in problemdata
-				.row
+				.row.well
 					.col-md-3.col-sm-12
 						.editContent
 							h3 #{item.name}
 						.editContent
 							p
 								strong
-									Time Created: #{item.time_created}
+									| Score: #{item.score}
+								br
+								| Dimension: #{item.dimension}
 					.col-md-5.col-sm-12
 						.editContent
 							h3 Description

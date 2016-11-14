@@ -332,16 +332,37 @@ html(lang='en')
 					form(role='form',method='post',action='/superadmin/createproblem',enctype='multipart/form-data')
 						.form-group
 							label Problem Name
-							input.form-control(name='problemname',type='text')
+							input.form-control(name='problemname',type='text' required)
 						.form-group
 							label Problem Statement
-							textarea.form-control(rows='2',name='statement')
+							textarea.form-control(rows='2',name='statement' required)
 						.form-group
 							label Problem Description
-							textarea.form-control(rows='5',name='description')
+							textarea.form-control(rows='5',name='description' required)
+						.form-group
+							label Problem Difficulty
+							select.form-control(name='difficulty' required)
+								each val in [1,2,3,4,5]
+									option(value=val) #{val}
+						.form-group
+							label Problem Type(Select default as active if you dont know what archive means)
+							select.form-control(name='probtype' required)
+								option(value='ACTIVE') ACTIVE
+								option(value='ARCHIVED') ARCHIVED
+						.form-group
+							label Problem Optimization
+							select.form-control(name='optimization' required)
+								option(value='MAXIMIZE') To Maximize
+								option(value='MINIMIZE') To Minimize
+						.form-group
+							label Problem Dimension
+							input.form-control(name='dimension', type='number' required)
+						.form-group
+							label Problem Score
+							input.form-control(name='score',type='number', min='0',max='100' required)
 						.form-group
 							label Enter the full name of the image you would like to show for the problem (Enter 'NO' if you dont want to add an image to this problem)
-							input.form-control(name='image',type='text')
+							input.form-control(name='image',type='text' required)
 						.form-group
 							input.btn.btn-primary(type='Submit',value='Create!')
 				// /.row	

@@ -75,8 +75,13 @@ router.route('/createproblem')
     var problemname=req.body.problemname;
     var statement=req.body.statement;
     var description=req.body.description;
+    var difficulty=req.body.difficulty;
+    var probtype=req.body.probtype;
+    var dimension=req.body.dimension;
+    var score=req.body.score;
     var image=req.body.image;
-    var sqlstmt = {name: problemname,statement:statement, description: description,image: image};
+    var optimization=req.body.optimization;
+    var sqlstmt = {name: problemname,statement:statement, description: description,difficulty:difficulty, type:probtype,dimension:dimension,score:score,image: image,optimization:optimization};
     con.query('INSERT INTO problems SET ?', sqlstmt, function(err, result) {
         if(err)
         {

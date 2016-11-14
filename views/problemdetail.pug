@@ -14,12 +14,13 @@ block content
 			.col-sm-12
 				.underlined-title.text-left
 					.editContent
-						h1 #{problemdata.name}
+						h1 #{problemdata.name} 
+							span.pull-right Score:#{problemdata.score}
 					.editContent
 						h3
-							| Problem Statement: 
+							| Problem Statement: #{problemdata.statement}
 					.editContent
-						h2
+						h5
 							| #{problemdata.description}
 					.editContent
 						p

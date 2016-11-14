@@ -98,6 +98,20 @@ app.get('/home', function (req, res) {
     }
     });
 });
+app.post('/home', function (req, res) {
+    var data={email:req.body.email};
+    con.query('INSERT into subscription SET ?',data,function(err,rows){
+    if(err){
+        req.session.success="Thank You! You are already subscribed";
+        res.redirect('/home')
+    } 
+    else{
+        req.session.success="Thank You! You have successfully subscribed to TorRanker";
+        res.redirect('/home');
+    }
+        });
+    //res.render("aboutus", { title: "About Us", user_name: req.session.user_name});
+});
 app.get('/pricing', function (req, res) {
     res.render("pricing", { title: "Pricing", user_name: req.session.user_name});
 });
