@@ -15,6 +15,7 @@ block content
                     .editContent
                         p
                             | Description
+                    .editContent
                 .col-md-4.col-md-offset-1
                     #accordion1.panel-group
                         .panel.panel-default
@@ -37,6 +38,8 @@ block content
                                                         .panel-body
                                                             | #{active[0].descr}
                                                             br
+                                                            | Ends: #{active[0].end_date}
+                                                            br
                                                             a(href='/contests/'+active[0].contest_id+'/problems') See Details
                                             if(active[1])
                                                 .panel.panel-default
@@ -47,6 +50,8 @@ block content
                                                         .panel-body
                                                             | #{active[1].descr}
                                                             br
+                                                            | Ends: #{active[1].end_date}
+                                                            br
                                                             a(href='/contests/'+active[1].contest_id+'/problems') See Details
                                             if(active[2])
                                                 .panel.panel-default
@@ -56,6 +61,8 @@ block content
                                                     #collapseThree1.panel-collapse.collapse
                                                         .panel-body
                                                             | #{active[2].descr}
+                                                            br
+                                                            | Ends: #{active[2].end_date}
                                                             br
                                                             a(href='/contests/'+active[2].contest_id+'/problems') See Details
                                             if(!active[0])
@@ -127,14 +134,16 @@ block content
                             #content3.panel-collapse.collapse
                                 .panel-body
                                     .editContent
-                                        h4 DM Images
+                                        h4 TopRanker
                                     .editContent
                                         p
                                             | Thapar University,
                                             br
-                                            |                                            Patiala,
+                                            | Patiala, Punjab
                                             br
-                                            |                                            LO4 6ON
+                                            | Email: psrana@gmail.com, arushngpl16@gmail.com
+                                            br
+                                            | Phone: +91-9988090859
                                     // img.img-responsive(src='images/seagulls.jpg')
                                 // /.panel-body
                             // /.content
@@ -143,7 +152,19 @@ block content
                 // /.column
             // /.row
         // /.container
-
+    section.content-block-nopad.bg-deepocean
+        .container.footer-1-4
+            .editContent
+                h2
+                    | Subscribe for 
+                    strong Updates
+            //
+                .editContent
+                    p.lead
+                        a(href='#') Available exclusively at Android Market
+            form.footer-form(action='#')
+                input(type='text', name='', value='Your Email', placeholder='', required='')
+                input(type='submit', name='', value='Subscribe')
     // // END Content Block 3-4
     
     // // END Footer 1-1
