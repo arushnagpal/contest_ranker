@@ -3,7 +3,8 @@ var router = express.Router();
 var con=require("./database");
 module.exports = router;
 
-router.route('/contests/:pid')
+
+router.route('/problems/:pid')
   .get(function (req, res) {
     var pid=req.params.pid;
     con.query('select userid,score from leaderboard where problemid="'+pid+'" order by score desc',function(err,rows){
@@ -11,7 +12,17 @@ router.route('/contests/:pid')
 
             else     
               res.render("leaderboard", { title : "Leaderboard", data : rows, user_name: req.session.user_name,problem:pid});
-            console.log(rows);
+            //console.log(rows);
+        });
+  });
+router.route('/problems')
+  .get(function (req, res) {
+    con.query('select uid,name from problems',function(err,rows){
+         if(err) throw err;
+
+            else     
+              res.render("leaderboard_problem", { title : "Leaderboard", data : rows, user_name: req.session.user_name});
+            //console.log(rows);
         });
   });
 router.route('/')
@@ -21,7 +32,7 @@ router.route('/')
 
             else     
               res.render("leaderboard", { title : "Leaderboard", data : rows, user_name: req.session.user_name});
-            console.log(rows);
+            //console.log(rows);
         });
   });
 router.route('/:cid')

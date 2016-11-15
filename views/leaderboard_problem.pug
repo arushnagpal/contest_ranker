@@ -6,15 +6,18 @@ block content
 
 	section.content-block
 		.container
+			.underlined-title
+				.editContent
+					h1 Choose Problem
 			table.table
 				thead
 					tr
-						th Contest Name
-						th Participants
+						th Problem
 				tbody
 					each item in data
 						tr
-							td #{item.name}
+							td 
+								a(href='/leaderboard/problems/'+item.uid) #{item.name}
 								
 
 	include footer

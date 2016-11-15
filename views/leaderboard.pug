@@ -9,23 +9,26 @@ block content
 				.underlined-title
 					.editContent
 					if(problem)
-						h1 Leaderboard fro Problem ID: #{problem}
+						h1 Leaderboard for Problem ID: #{problem}
 						h5
 							a.pull-right(href='/leaderboard') Click here for global leaderboard
 					else
 						h1 Global Leaderboard
 						h5
-							a.pull-right(href='/leaderboard/problem') Click here for problem wise leaderboard
+							a.pull-right(href='/leaderboard/problems') Click here for problem wise leaderboard
 				.row
 					table.table.table-bordered.tablesorter#sortthistable(data-page-length='4')
 						THEAD.thead-inverse
 							tr
+								th Rank
 								th User
 								th Points Scored
 						TBODY
+							-var ranki=1
 							each item in data
 								tr
+									td #{ranki}
 									td #{item.userid}
 									td #{item.score}
-
+									- ranki=ranki+1
 	include footer
