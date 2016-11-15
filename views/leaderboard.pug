@@ -6,6 +6,26 @@ block content
 
 	section.content-block
 			.container
-				
+				.underlined-title
+					.editContent
+					if(problem)
+						h1 Leaderboard fro Problem ID: #{problem}
+						h5
+							a.pull-right(href='/leaderboard') Click here for global leaderboard
+					else
+						h1 Global Leaderboard
+						h5
+							a.pull-right(href='/leaderboard/problem') Click here for problem wise leaderboard
+				.row
+					table.table.table-bordered.tablesorter#sortthistable(data-page-length='4')
+						THEAD.thead-inverse
+							tr
+								th User
+								th Points Scored
+						TBODY
+							each item in data
+								tr
+									td #{item.userid}
+									td #{item.score}
 
 	include footer
