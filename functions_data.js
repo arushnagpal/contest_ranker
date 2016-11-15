@@ -1,6 +1,6 @@
 module.exports =
 {
-    112: function(arr,D,fn) {
+    122: function(arr,D,fn) {
      		var ans=1;
      		for(i=0;i<D;i++)
      		{
@@ -8,7 +8,7 @@ module.exports =
      		}
      		fn(ans);
      	},
-     119: function(arr,D,fn) {
+     121: function(arr,D,fn) {
      		var ans=0;
      		for(i=0;i<D;i++)
      		{
