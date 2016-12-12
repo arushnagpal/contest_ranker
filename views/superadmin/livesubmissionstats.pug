@@ -303,6 +303,25 @@ html(lang='en')
 								a.close(href='#', data-dismiss='alert', aria-label='close') ×
 								strong Error!
 								|  #{locals.error}.
+					h3 My Submissions
+						span.pull-right
+							a(href='#' onclick='reload_submissions()')
+								p Refresh Submissions
+									i.fa.fa-refresh
+					p Most recent first
+					.col-sm-12
+						table.table.table-bordered.tablesorter#sortthistable(data-page-length='4')
+							THEAD.thead-inverse
+								tr
+									th Problem Name
+									th Calculated Answer
+									th Time Submitted
+							TBODY
+								each item in data
+									tr
+										td #{item.name}
+										td #{item.answer}
+										td #{item.time_submitted}
 					// /.col-lg-12
 				// /.row
 				.row

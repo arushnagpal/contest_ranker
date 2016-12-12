@@ -15,8 +15,18 @@ router.route('/:id/problems/:uid')
     var contest_id=req.params.id;
     var problem_id=req.params.uid;
 
-    var problemdetail = 'SELECT * FROM problems where uid = '+ problem_id;
-    //console.log(problemdetail);
+    var problemdetail = 'SELECT * FROM problems where uid ='+ problem_id;
+    var num='SELECT count(*) as count from submissions where problem_id='+problem_id;
+    var lead='SELECT userid from leaderboard where problemid='+problem_id+' and score =(SELECT MAX(score) from leaderboard where problemid='+problem_id+' )';
+    if(req.session.user_name)
+    { var score='SELECT score from leaderboard where problemid='+problem_id+' and userid='+req.session.user_name;}
+    else
+    {  var score='SELECT 2 FROM DUAL';}
+    //console.log(num);
+    //console.log(lead);
+    //console.log(score);
+    //con.query(problemdetail+' ; '+num+' ; '+lead+' ; '+score,function(err,rows){
+      var query=problemdetail+' ; '+num+' ; '+lead+' ; '+score;
     con.query(problemdetail,function(err,rows){
        if(err) 
        {
@@ -27,7 +37,9 @@ router.route('/:id/problems/:uid')
        {
                 //console.log(rows[0]);
                 //console.log(rows[1]);
-                res.render("problemdetail", { title: "Contests", problemdata:rows[0],user_name: req.session.user_name});
+                //console.log(rows[2]);
+                //console.log(rows[3]);
+                res.render("problemdetail", { title: "Contests", num:rows[1],problemdata:rows[0],user_name: req.session.user_name});
             }
             //console.log(rows);
         });

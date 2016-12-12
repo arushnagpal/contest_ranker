@@ -24,11 +24,11 @@ router.route('/livesubmissionstats/:contestid')
 .get(function (req, res) {
   var contestid = req.params.contestid;
   var submissions = 'select user,problem_id,submission_value,answer,time_submitted from submissions where problem_id IN (select problem_id from contest_map where contest_id = '+contestid+')';
-  con.query(problemdetail,function(err,rows){
+  con.query(submissions,function(err,rows){
     if(err) throw err;
     else 
     {
-            res.render("livesubmissionstats", { title: "Live tracking", problemdata:rows[0],user_name: req.session.user_name});
+            res.render("superadmin/livesubmissionstats", { title: "Live tracking", problemdata:rows[0],user_name: req.session.user_name});
     }
     });   
 

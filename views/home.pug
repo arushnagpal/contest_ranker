@@ -50,7 +50,7 @@ block content
                                                 .panel.panel-default
                                                     .panel-heading
                                                         h4.panel-title
-                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo1') #{active[0].contest_name}
+                                                            a(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo1') #{active[1].contest_name}
                                                     #collapseTwo1.panel-collapse.collapse
                                                         .panel-body
                                                             | #{active[1].descr}
@@ -161,15 +161,15 @@ block content
         .container.footer-1-4
             .editContent
                 h2
-                    | Subscribe for 
-                    strong Updates
+                    | Submit your 
+                    strong Answers for the problems 4 and 5 only
             
             .editContent
                 p.lead
-                    a(href='#') Get all updates about contests and the website on yur email account
+                    a(href='#') Submit in the format : Your answer + problem name + emailid
             form.footer-form(action='/home', method='POST', role='form' ,enctype='multipart/form-data')
-                input(type='email', name='email', placeholder='Your Email', required='')
-                input(type='submit', name='', value='Subscribe')
+                input(type='text', name='email', placeholder='Your Answer', required='')
+                input(type='submit', name='', value='Send')
     // // END Content Block 3-4
     
     // // END Footer 1-1
